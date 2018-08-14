@@ -6,4 +6,5 @@
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "git.ignoreLimitWarning": true,
+    "python.linting.pep8Enabled": false,
 }

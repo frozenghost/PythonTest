@@ -1,0 +1,1 @@
+cd react_frontend && npm run build

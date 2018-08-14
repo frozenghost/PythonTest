@@ -65,7 +65,7 @@
                 "--no-debugger",
                 "--no-reload"
             ],
-            "preLaunchTask":"vue_build",
+            "preLaunchTask":"react_build",
             "envFile": "${workspaceRoot}/.env",
             "debugOptions": [
                 "WaitOnAbnormalExit",
