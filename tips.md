@@ -1,0 +1,1 @@
+1. pip下载速度慢， 使用如下命令：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple flask-sqlalchemy

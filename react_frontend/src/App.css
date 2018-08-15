@@ -1,10 +1,25 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
 
+.App-trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.App-trigger:hover{
+  color: #1890ff;
+}
+
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 32px;
+  background: rgba(255,255,255,.2);
+  margin: 16px;
 }
 
 .App-header {

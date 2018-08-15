@@ -2,9 +2,9 @@
     "python.pythonPath": "D:/Program Files/Python36/python",
     "python.formatting.provider": "yapf",
     "python.linting.pylintEnabled": false,
-    "python.linting.pydocstyleEnabled": false,
+    "python.linting.pydocstyleEnabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Enabled": false,
     "git.ignoreLimitWarning": true,
     "python.linting.pep8Enabled": false,
 }
