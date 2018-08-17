@@ -1,0 +1,42 @@
+@import '~antd/dist/antd.css';
+
+.login-form {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: calc(100% - 40px);
+    max-width: 440px;
+    min-width: 320px;
+    min-height: 350px;
+    background-color: white;
+    padding: 44px;
+    border-radius: 10px;
+    border-color: rgb(84, 190, 102);
+}
+
+.login-middle {
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.login-outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/login-bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.login-logo {
+    height: 32px;
+    background: rgba(45, 44, 83, 0.205);
+    margin: 16px;
+  }

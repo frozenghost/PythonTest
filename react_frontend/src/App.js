@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Layout, Menu, Icon } from 'antd';
+import WrappedNormalLoginForm from './LoginModule/LoginForm';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
 const { SubMenu } = Menu;
@@ -21,9 +23,9 @@ class App extends Component {
     return (
       <Layout className="container">
         <Sider
-            trigger={null}
-            collapsible
-            collapsed={this.state.collapsed}
+          trigger={null}
+          collapsible
+          collapsed={this.state.collapsed}
         >
           <div className="App-logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
@@ -44,13 +46,15 @@ class App extends Component {
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
             <Icon
-                className="App-trigger"
-                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                onClick={this.toggle}
+              className="App-trigger"
+              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggle}
             />
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            Content
+            <Switch>
+              <Route path="/" component={WrappedNormalLoginForm} />
+            </Switch>
           </Content>
         </Layout>
       </Layout>
