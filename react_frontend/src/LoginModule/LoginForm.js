@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import request from '../Common/Utils/request';
 import './LoginForm.css';
 
 const FormItem = Form.Item;
 
 class NormalLoginForm extends React.Component {
+  constructor(...props) {
+    super(...props);
+    this.handleLogin = this.handleLogin.bind(this)
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        let sendData = { userName: values.userName, password: values.password };
+        let option = {
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sendData)
+        };
+        request('/api/LoginAction', option).then(this.handleLogin).catch(ex => {
+          console.error('获取数据出错, ', ex.message);
+        });
       }
     });
+  }
+
+  handleLogin = (response) => {
+    debugger;
+    var data = response.json();
+    console.log(data);
+    return data;
   }
 
   render() {
