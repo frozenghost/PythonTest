@@ -65,7 +65,6 @@
                 "--no-debugger",
                 "--no-reload"
             ],
-            "preLaunchTask":"react_build",
             "envFile": "${workspaceRoot}/.env",
             "debugOptions": [
                 "WaitOnAbnormalExit",
