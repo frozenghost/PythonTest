@@ -16,7 +16,7 @@ class NormalLoginForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        let sendData = { userName: values.userName, password: values.password };
+        let sendData = { username: values.username, password: values.password };
         let option = {
           method: 'POST',
           credentials: 'include',
@@ -50,7 +50,7 @@ class NormalLoginForm extends React.Component {
               <div className="login-logo" />
             </FormItem>
             <FormItem>
-              {getFieldDecorator('userName', {
+              {getFieldDecorator('username', {
                 rules: [{ required: true, message: '请输入用户名/邮箱!' }],
               })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名/邮箱" />
