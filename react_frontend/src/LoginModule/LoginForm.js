@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Alert } from 'antd';
 import request from '../Common/Utils/request';
 import './LoginForm.css';
 
@@ -8,10 +8,16 @@ const FormItem = Form.Item;
 class NormalLoginForm extends React.Component {
   constructor(...props) {
     super(...props);
-    this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
+  state = {
+    needLoading: false,
+    errorMessage: ""
+  };
+
   handleSubmit = (e) => {
+    this.setState({ needLoading: true });
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -35,8 +41,16 @@ class NormalLoginForm extends React.Component {
 
   handleLogin = (response) => {
     debugger;
-    var data = response.json();
-    console.log(data);
+    if (response.status >= 200 && response.status < 300) {
+      var data = response.json();
+      console.log(data);
+      this.props.history.push("/home"); //跳转页面
+      this.setState({ needLoading: false });
+    }
+    else {
+      this.setState({ errorMessage: "无效的用户名或密码", needLoading: false });
+    }
+
     return data;
   }
 
@@ -47,7 +61,13 @@ class NormalLoginForm extends React.Component {
         <div className="login-middle">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
-              <div className="login-logo" />
+              <div className="login-logo">
+                <Alert
+                  message="123"
+                  type="error"
+                  showIcon/>
+              </div>
+
             </FormItem>
             <FormItem>
               {getFieldDecorator('username', {
@@ -71,7 +91,7 @@ class NormalLoginForm extends React.Component {
                 <Checkbox>记住我</Checkbox>
               )}
               <a className="login-form-forgot" href="">忘记密码</a>
-              <Button type="primary" htmlType="submit" className="login-form-button">
+              <Button type="primary" htmlType="submit" className="login-form-button" loading={this.state.needLoading}>
                 登录
               </Button>
             </FormItem>

@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, url_for, request
+from flask import render_template, Blueprint, url_for, request, abort, jsonify
 from common import privateKey
 from common.encrypt import rsa_long_decrypt
 from models.user import User
@@ -28,5 +28,7 @@ def LoginAction():
     user_dict = json.loads(target)
     user_query = User.query.filter(User.username == user_dict["username"]).first()
     if(user_query is not None):
-        pass
-    return json.dumps(target)
+        return jsonify(message="Success"), 200
+    else:
+        return jsonify(message="未找到该用户"), 404
+    
