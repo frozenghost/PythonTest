@@ -62,12 +62,8 @@ class NormalLoginForm extends React.Component {
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               <div className="login-logo">
-                <Alert
-                  message="123"
-                  type="error"
-                  showIcon/>
+                {this.state.errorMessage !== "" ? <Alert type='error' message={this.state.errorMessage} showIcon />: null}
               </div>
-
             </FormItem>
             <FormItem>
               {getFieldDecorator('username', {

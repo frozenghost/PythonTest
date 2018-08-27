@@ -27,7 +27,7 @@ def LoginAction():
     print(target)
     user_dict = json.loads(target)
     user_query = User.query.filter(User.username == user_dict["username"]).first()
-    if(user_query is not None):
+    if(user_query is not None and User.CheckPassword(user_query.password, user_dict["password"])):
         return jsonify(message="Success"), 200
     else:
         return jsonify(message="未找到该用户"), 404
