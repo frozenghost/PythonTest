@@ -39,6 +39,7 @@ class NormalLoginForm extends React.Component {
           console.error('获取数据出错, ', ex.message);
         });
       }
+      this.setState({ needLoading: false });
     });
   }
 
@@ -47,12 +48,11 @@ class NormalLoginForm extends React.Component {
     if (response.status >= 200 && response.status < 300) {
       var data = response.json();
       console.log(data);
-      this.setState({ needLoading: false });
       storage.local.set("username", this.username);
       this.props.history.push("/home"); //跳转页面
     }
     else {
-      this.setState({ errorMessage: "无效的用户名或密码", needLoading: false });
+      this.setState({ errorMessage: "无效的用户名或密码" });
     }
 
     return data;

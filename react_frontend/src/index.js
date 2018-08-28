@@ -6,28 +6,9 @@ import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import registerServiceWorker from './registerServiceWorker';
 import storage from './Common/Utils/storage';
-import Loadable from 'react-loadable';
+import { App } from './LoadableComponent';
 import './index.css';
 
-
-const loadingComponent = ({ isLoading, error }) => {
-    // Handle the loading state
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    // Handle the error state
-    else if (error) {
-        return <div>Sorry, there was a problem loading the page.</div>;
-    }
-    else {
-        return null;
-    }
-};
-
-const App = Loadable({
-    loader: () => import('./App'),
-    loading: loadingComponent
-});
 
 class Root extends Component {
     constructor(...props) {
@@ -37,8 +18,9 @@ class Root extends Component {
 
     authorize = (Component, props) => {
         if (this.isLogin()) {
+            var temp = { isLogin: this.isLogin.bind(this), ...props }; // 传递父组件的方法，判断是否登录
             return (
-                <Component {...props} />
+                <Component {...temp} />
             );
         }
         return (

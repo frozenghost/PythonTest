@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Layout, Menu, Icon } from 'antd';
-import Home from './Home';
-import { Switch, Route } from 'react-router-dom';
-import './App.css';
+import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import storage from './Common/Utils/storage';
+import { Home, Test } from './LoadableComponent';
+import './App.css';
 
 const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
 
 class App extends Component {
+  constructor(...props) {
+    super(...props);
+  }
+
   state = {
     collapsed: false
   };
@@ -26,6 +30,9 @@ class App extends Component {
   }
 
   render() {
+    if(!this.props.isLogin()){
+      return <Redirect to="/login" />;
+    }
     return (
       <Layout className="container">
         <Sider
@@ -37,7 +44,7 @@ class App extends Component {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Icon type="user" />
-              <span>nav 1</span>
+              <span><NavLink to="/home">Home</NavLink></span>
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="video-camera" />
@@ -60,6 +67,7 @@ class App extends Component {
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
             <Switch>
+              <Route path="/home" component={Test} />
               <Route path="/" component={Home} />
             </Switch>
           </Content>
