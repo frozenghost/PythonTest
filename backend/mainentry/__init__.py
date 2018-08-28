@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import render_template, Blueprint, url_for, request, abort, jsonify
 from common import privateKey
 from common.encrypt import rsa_long_decrypt
@@ -7,6 +8,7 @@ import json
 import base64
 import rsa
 
+# 主要入口
 main = Blueprint(
     "Main",
     __name__,
@@ -14,12 +16,13 @@ main = Blueprint(
     static_folder="..\\static",
     static_url_path="/backend/static")
 
-
-@main.route('/')
-def index():
+# 路由交给react控制，始终渲染一个页面
+@main.route('/', defaults={'path': ''})
+@main.route('/<path:path>')
+def index(path):
     return render_template('index.html')
 
-
+# 登录接口，返回登录结果
 @main.route('/api/LoginAction', methods=['POST'])
 def LoginAction():
     data = base64.decodestring(request.data)

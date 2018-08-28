@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox, Alert } from 'antd';
 import request from '../Common/Utils/request';
+import storage from '../Common/Utils/storage';
 import './LoginForm.css';
 
 const FormItem = Form.Item;
@@ -9,6 +10,7 @@ class NormalLoginForm extends React.Component {
   constructor(...props) {
     super(...props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.username = "";
   }
 
   state = {
@@ -32,6 +34,7 @@ class NormalLoginForm extends React.Component {
           },
           body: JSON.stringify(sendData)
         };
+        this.username = values.username;
         request('/api/LoginAction', option).then(this.handleLogin).catch(ex => {
           console.error('获取数据出错, ', ex.message);
         });
@@ -44,8 +47,9 @@ class NormalLoginForm extends React.Component {
     if (response.status >= 200 && response.status < 300) {
       var data = response.json();
       console.log(data);
-      this.props.history.push("/home"); //跳转页面
       this.setState({ needLoading: false });
+      storage.local.set("username", this.username);
+      this.props.history.push("/home"); //跳转页面
     }
     else {
       this.setState({ errorMessage: "无效的用户名或密码", needLoading: false });
@@ -62,7 +66,7 @@ class NormalLoginForm extends React.Component {
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               <div className="login-logo">
-                {this.state.errorMessage !== "" ? <Alert type='error' message={this.state.errorMessage} showIcon />: null}
+                {this.state.errorMessage !== "" ? <Alert type='error' message={this.state.errorMessage} showIcon /> : null}
               </div>
             </FormItem>
             <FormItem>

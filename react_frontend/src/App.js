@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { Layout, Menu, Icon } from 'antd';
-import WrappedNormalLoginForm from './LoginModule/LoginForm';
+import Home from './Home';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
+import storage from './Common/Utils/storage';
 
 const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
@@ -17,6 +18,11 @@ class App extends Component {
     this.setState({
       collapsed: !this.state.collapsed
     });
+  }
+
+  logout = () => {
+    storage.local.remove("username");
+    this.props.history.push("/login");
   }
 
   render() {
@@ -50,10 +56,11 @@ class App extends Component {
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
+            <Icon className="App-logout" type="logout" onClick={this.logout} />
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
             <Switch>
-              <Route path="/" component={WrappedNormalLoginForm} />
+              <Route path="/" component={Home} />
             </Switch>
           </Content>
         </Layout>
