@@ -3,6 +3,8 @@ from flask import render_template, Blueprint, url_for, request, abort, jsonify
 from common import privateKey
 from common.encrypt import rsa_long_decrypt
 from models.user import User
+from models.module import Module
+from common.alchemy_encoder import AlchemyEncoder
 from datetime import datetime
 import json
 import base64
@@ -15,6 +17,8 @@ main = Blueprint(
     template_folder="..\\templates",
     static_folder="..\\static",
     static_url_path="/backend/static")
+
+
 
 # 路由交给react控制，始终渲染一个页面
 @main.route('/', defaults={'path': ''})
@@ -34,4 +38,16 @@ def LoginAction():
         return jsonify(message="Success"), 200
     else:
         return jsonify(message="未找到该用户"), 404
+
+
+# 获取模块
+@main.route('/api/Modules', methods=['GET'])
+def GetModules():
+    module_query = Module.query.all()
+    result = []
+    for module in module_query:
+        result.append(module)
+    return json.dumps(module_query, cls=AlchemyEncoder, ensure_ascii=False)
+
+
     

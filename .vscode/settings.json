@@ -1,10 +1,10 @@
 {
     "python.pythonPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
     "python.formatting.provider": "yapf",
-    "python.linting.pylintEnabled": true,
+    "python.linting.pylintEnabled": false,
     "python.linting.pydocstyleEnabled": false,
-    "python.linting.enabled": true,
+    "python.linting.enabled": false,
     "python.linting.flake8Enabled": false,
     "git.ignoreLimitWarning": true,
-    "python.linting.pep8Enabled": false,
+    "python.linting.pep8Enabled": true,
 }

@@ -5,6 +5,7 @@ import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import storage from './Common/Utils/storage';
 import { Home, Test } from './LoadableComponent';
 import './App.css';
+import request from './Common/Utils/request';
 
 const { SubMenu } = Menu;
 const { Header, Sider, Content } = Layout;
@@ -15,8 +16,28 @@ class App extends Component {
   }
 
   state = {
-    collapsed: false
+    collapsed: false,
+    modules: []
   };
+
+  componentWillMount() {
+    let option = {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    request("/api/Modules", option).then((response) => {
+      return response.json();//json访法仍是promise
+    }).then((data) => {
+      console.log(data);
+      this.setState({ modules: data });
+    }).catch(ex => {
+      console.error('获取数据出错, ', ex.message);
+    });
+  }
 
   toggle = () => {
     this.setState({
@@ -30,7 +51,8 @@ class App extends Component {
   }
 
   render() {
-    if(!this.props.isLogin()){
+    const modules = this.state.modules;
+    if (!this.props.isLogin()) {
       return <Redirect to="/login" />;
     }
     return (
@@ -42,18 +64,14 @@ class App extends Component {
         >
           <div className="App-logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span><NavLink to="/home">Home</NavLink></span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
+            {
+              modules.map((item, index) => {
+                return (
+                  <Menu.Item key={index + 1}>
+                    <NavLink to={item.moduleurl}><Icon type={item.moduleicontype} />{item.modulename}</NavLink>
+                  </Menu.Item>);
+              })
+            }
           </Menu>
         </Sider>
         <Layout>
