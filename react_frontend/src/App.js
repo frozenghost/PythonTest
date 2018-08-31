@@ -68,7 +68,7 @@ class App extends Component {
               modules.map((item, index) => {
                 return (
                   <Menu.Item key={index + 1}>
-                    <NavLink to={item.moduleurl}><Icon type={item.moduleicontype} />{item.modulename}</NavLink>
+                    <NavLink to={item.moduleurl}><Icon type={item.moduleicontype} />{this.state.collapsed ? "" : item.modulename}</NavLink>
                   </Menu.Item>);
               })
             }
