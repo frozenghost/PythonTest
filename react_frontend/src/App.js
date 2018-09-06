@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import { Layout, Menu, Icon } from 'antd';
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 import storage from './Common/Utils/storage';
-import { Home, Test } from './LoadableComponent';
+import Routers from './Common/router';
 import './App.css';
 import request from './Common/Utils/request';
 
@@ -84,10 +84,7 @@ class App extends Component {
             <Icon className="App-logout" type="logout" onClick={this.logout} />
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            <Switch>
-              <Route path="/home" component={Test} />
-              <Route path="/" component={Home} />
-            </Switch>
+            <Routers />
           </Content>
         </Layout>
       </Layout>

@@ -8,7 +8,7 @@ for module in module_query:
     db.session.delete(module)
 m = Module("10001", "主页", "home", "/home", 1)
 db.session.add(m)
-m = Module("10002", "占位符1", "question", "/1", 2)
+m = Module("10002", "常用在线工具", "tool", "/tools", 2)
 db.session.add(m)
 m = Module("10003", "占位符2", "question", "/2", 3)
 db.session.add(m)

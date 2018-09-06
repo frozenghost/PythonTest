@@ -25,9 +25,14 @@ const Home = Loadable({
     loading: loadingComponent
 });
 
+const Tools = Loadable({
+    loader: () => import('./ToolsModule/Tools'),
+    loading: loadingComponent
+});
+
 const Test = Loadable({
     loader: () => import('./LoginModule/LoginForm'),
     loading: loadingComponent
 });
 
-export { App, Home, Test };
+export { App, Home, Test, Tools };

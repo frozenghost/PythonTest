@@ -4,7 +4,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                123
+                1234
             </div>
         );
     }
