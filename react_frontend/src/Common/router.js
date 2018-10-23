@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Home, Test, Tools } from '../LoadableComponent';
+import { Home, Test, Tools, Jobs } from '../LoadableComponent';
 import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
 
 var data = [{ path: '/home', relatedcomponent: Test },
 { path: '/tools', relatedcomponent: Tools },
+{ path: '/jobs', relatedcomponent: Jobs },
 { path: '/', relatedcomponent: Home }
 ];
 

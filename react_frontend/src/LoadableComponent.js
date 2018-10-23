@@ -30,9 +30,14 @@ const Tools = Loadable({
     loading: loadingComponent
 });
 
+const Jobs = Loadable({
+    loader: () => import('./JobsModule/Jobs'),
+    loading: loadingComponent
+});
+
 const Test = Loadable({
     loader: () => import('./LoginModule/LoginForm'),
     loading: loadingComponent
 });
 
-export { App, Home, Test, Tools };
+export { App, Home, Test, Tools, Jobs };

@@ -29,6 +29,8 @@ def creat_app(config_name='dev'):
     # 注册蓝图
     from mainentry import main
     app.register_blueprint(main)
+    from jobprovider import job
+    app.register_blueprint(job)
     app.config.from_object(config[config_name])
     return app
 
